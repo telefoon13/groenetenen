@@ -9,6 +9,10 @@
 <body>
 <vdab:menu/>
 <h1>Groene tenen - Filialen</h1>
-
+<c:forEach var="filiaal" items="${filialen}">
+    <h2>${filiaal.naam}</h2>
+    <p>${filiaal.adres.straat} ${filiaal.adres.huisNr} <br>
+            ${filiaal.adres.postcode} ${filiaal.adres.gemeente}</p>
+</c:forEach>
 </body>
 </html>

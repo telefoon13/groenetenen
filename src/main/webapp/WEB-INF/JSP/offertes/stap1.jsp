@@ -4,13 +4,15 @@
 <!doctype html>
 <html lang="nl">
 <head>
-    <vdab:head title="Groene tenen - Toevoegen van filiaal"/>
+    <vdab:head title="Groene tenen"/>
 </head>
 <body>
 <vdab:menu/>
-<h1>Groene tenen - Toevoegen van filiaal</h1>
-<form method="post" action="<c:url value="/filialen"/> ">
-    <input type="submit" value="Toevoegen">
+<h1>Aanvraag offerte</h1>
+<h2>Stap 1</h2>
+<form method='post' action="<c:url value='/offertes'/>">
+    <div>Hier vraag je later de voornaam, familienaam en e-mail adres</div>
+    <input type='submit' value='Volgende stap' name='volgende'>
 </form>
 </body>
 </html>

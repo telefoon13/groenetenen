@@ -4,13 +4,11 @@
 <!doctype html>
 <html lang="nl">
 <head>
-    <vdab:head title="Groene tenen - Toevoegen van filiaal"/>
+    <vdab:head title="Groene tenen - Info"/>
 </head>
 <body>
 <vdab:menu/>
-<h1>Groene tenen - Toevoegen van filiaal</h1>
-<form method="post" action="<c:url value="/filialen"/> ">
-    <input type="submit" value="Toevoegen">
-</form>
+<h1>Groene tenen - Info</h1>
+
 </body>
 </html>
