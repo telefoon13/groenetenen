@@ -3,6 +3,7 @@ package be.vdab.web;
 import be.vdab.services.FiliaalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,8 +35,8 @@ public class FiliaalController {
 		return TOEVOEGEN_VIEW;
 	}
 
-	@GetMapping(params = "id")
-	ModelAndView read(long id){
+	@GetMapping("{id}")
+	ModelAndView read(@PathVariable long id){
 		ModelAndView modelAndView = new ModelAndView(FILIAAL_VIEW);
 		filiaalService.read(id).ifPresent(filiaal -> modelAndView.addObject(filiaal));
 		return modelAndView;
