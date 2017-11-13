@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@taglib prefix='vdab' uri='http://vdab.be/tags' %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="nl">
 <head>
@@ -20,10 +20,8 @@
     <dt>Waarde gebouw</dt>
     <dd>&euro; <fmt:formatNumber value='${filiaal.waardeGebouw}'/></dd>
     <dt>Ingebruikname</dt>
-    <fmt:parseDate value="${filiaal.inGebruikName}" pattern="yyyy-MM-dd"
-                   var="inGebruikNameAlsDate" type="date"/>
-    <dd><fmt:formatDate value='${inGebruikNameAlsDate}' type="date"
-                        dateStyle="short"/></dd></dl>
+    <fmt:parseDate value="${filiaal.inGebruikName}" pattern="yyyy-MM-dd" var="inGebruikNameAlsDate" type="date"/>
+    <dd><fmt:formatDate value='${inGebruikNameAlsDate}' type="date" dateStyle="short"/></dd></dl>
 </c:when>
     <c:otherwise>
         <div class='fout'>Filiaal niet gevonden</div>

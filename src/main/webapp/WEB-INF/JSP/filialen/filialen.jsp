@@ -11,9 +11,9 @@
 <h1>Groene tenen - Filialen</h1>
 <c:forEach var="filiaal" items="${filialen}">
     <c:url var="url" value="/filialen">
-        <c:param name="id" value="${filiaal.id}"
+        <c:param name="id" value="${filiaal.id}"/>
     </c:url>
-    <h2><a href="${url}">${filiaal.naam}</a></h2>
+    <h2><a href="${url}">${filiaal.naam}</a> </h2>
     <p>${filiaal.adres.straat} ${filiaal.adres.huisNr} <br>
             ${filiaal.adres.postcode} ${filiaal.adres.gemeente}</p>
 </c:forEach>
