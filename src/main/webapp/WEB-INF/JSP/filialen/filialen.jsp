@@ -9,7 +9,7 @@
 </head>
 <body>
 <vdab:menu/>
-<h1>Groene tenen - Filialen</h1>
+<h1><spring:message code="aantalFilialen" arguments="${aantalFilialen}"/> </h1>
 <c:forEach var="filiaal" items="${filialen}">
     <spring:url var='url' value='/filialen/{id}'>
         <spring:param name='id' value='${filiaal.id}'/>
