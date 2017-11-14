@@ -2,6 +2,7 @@
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@taglib prefix='vdab' uri='http://vdab.be/tags' %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix='spring' uri="http://www.springframework.org/tags" %>
 <!doctype html>
 <html lang="nl">
 <head>
@@ -22,10 +23,19 @@
     <dt>Ingebruikname</dt>
     <fmt:parseDate value="${filiaal.inGebruikName}" pattern="yyyy-MM-dd" var="inGebruikNameAlsDate" type="date"/>
     <dd><fmt:formatDate value='${inGebruikNameAlsDate}' type="date" dateStyle="short"/></dd></dl>
+    <spring:url value="/filialen/{id}/verwijderen" var="verwijderURL">
+        <spring:param name="id" value="${filiaal.id}"/>
+    </spring:url>
+    <form method="post" action="${verwijderURL}">
+        <input type="submit" value="Verwijderen">
+    </form>
 </c:when>
     <c:otherwise>
         <div class='fout'>Filiaal niet gevonden</div>
     </c:otherwise>
 </c:choose>
+<c:if test='${not empty param.fout}'>
+    <div class='fout'>${param.fout}</div>
+</c:if>
 </body>
 </html>
