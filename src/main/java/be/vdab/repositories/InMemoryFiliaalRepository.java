@@ -2,12 +2,14 @@ package be.vdab.repositories;
 
 import be.vdab.entities.Filiaal;
 import be.vdab.valueobjects.Adres;
+import be.vdab.valueobjects.PostcodeReeks;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryFiliaalRepository implements FiliaalRepository {
@@ -49,4 +51,8 @@ public class InMemoryFiliaalRepository implements FiliaalRepository {
 		return id == 1L ? 7L : 0L;
 	}
 
+	@Override
+	public List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks) {
+		return filialen.values().stream().filter(filiaal -> reeks.bevat(filiaal.getAdres().getPostcode())).collect(Collectors.toList());
+	}
 }
