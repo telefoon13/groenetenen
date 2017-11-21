@@ -7,10 +7,12 @@ import be.vdab.valueobjects.PostcodeReeks;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -64,7 +66,7 @@ public class FiliaalController {
 	}
 
 	@GetMapping(params = {"vanpostcode", "totpostcode"})
-	ModelAndView findByPostcodeReeks(PostcodeReeks reeks, BindingResult bindingResult) {
+	ModelAndView findByPostcodeReeks(@Valid PostcodeReeks reeks, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView(PER_POSTCODE_VIEW);
 		if ( ! bindingResult.hasErrors()){
 			List<Filiaal> filialen = filiaalService.findByPostcodeReeks(reeks);
@@ -97,10 +99,5 @@ public class FiliaalController {
 			redirectAttributes.addAttribute("id", id).addAttribute("fout", "Filiaal heeft nog werknemers");
 			return REDIRECT_URL_HEEFT_NOG_WERKNEMERS;
 		}
-	}
-
-	@InitBinder("poscodeReeks")
-	void initBinderPostcodeReeks(DataBinder dataBinder){
-		dataBinder.setRequiredFields("vanpostcode", "totpostcode");
 	}
 }

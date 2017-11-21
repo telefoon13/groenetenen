@@ -1,23 +1,28 @@
 package be.vdab.valueobjects;
 
+import be.vdab.constraints.Postcode;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotNull;
+
 public class PostcodeReeks {
 
-	private final static int MIN_POSTCODE = 1000;
-	private final static int MAX_POSTCODE = 9999;
 
+	@Postcode
 	private Integer vanpostcode;
+	@Postcode
 	private Integer totpostcode;
 
 	public Integer getVanpostcode() {
 		return vanpostcode;
 	}
 
-	public void setVanpostcode(Integer vanpostcode) {
-		this.vanpostcode = vanpostcode;
-	}
-
 	public Integer getTotpostcode() {
 		return totpostcode;
+	}
+
+	public void setVanpostcode(Integer vanpostcode) {
+		this.vanpostcode = vanpostcode;
 	}
 
 	public void setTotpostcode(Integer totpostcode) {
@@ -26,11 +31,5 @@ public class PostcodeReeks {
 
 	public boolean bevat(Integer postcode){
 		return postcode >= vanpostcode && postcode <= totpostcode;
-	}
-
-	public void valideer(int postcode){
-		if (postcode < MIN_POSTCODE || postcode > MAX_POSTCODE){
-			throw new IllegalArgumentException();
-		}
 	}
 }
