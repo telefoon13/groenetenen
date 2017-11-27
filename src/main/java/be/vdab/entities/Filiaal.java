@@ -3,6 +3,7 @@ package be.vdab.entities;
 import be.vdab.valueobjects.Adres;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -19,6 +20,7 @@ public class Filiaal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long id;
 	@NotBlank
+	@SafeHtml
 	@Length(min = 1, max = 50)
 	private String naam;
 	private boolean hoofdFiliaal;
