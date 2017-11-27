@@ -1,9 +1,15 @@
 package be.vdab.entities;
 
 import be.vdab.valueobjects.Adres;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,12 +18,19 @@ public class Filiaal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private long id;
+	@NotBlank
+	@Length(min = 1, max = 50)
 	private String naam;
 	private boolean hoofdFiliaal;
-	@NumberFormat(pattern = "#,##0.00")
+	@NumberFormat(style = NumberFormat.Style.NUMBER)
+	@NotNull
+	@Min(0)
+	@Digits(integer = 10, fraction = 2)
 	private BigDecimal waardeGebouw;
 	@DateTimeFormat(style = "S-")
+	@NotNull
 	private LocalDate inGebruikName;
+	@Valid
 	private Adres adres;
 
 	public Filiaal(long id, String naam, boolean hoofdFiliaal, BigDecimal waardeGebouw, LocalDate inGebruikName, Adres adres) {
@@ -27,6 +40,9 @@ public class Filiaal implements Serializable {
 		this.waardeGebouw = waardeGebouw;
 		this.inGebruikName = inGebruikName;
 		this.adres = adres;
+	}
+
+	public Filiaal() {
 	}
 
 	public long getId() {

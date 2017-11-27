@@ -4,9 +4,11 @@ import be.vdab.constraints.Postcode;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class PostcodeReeks {
+public class PostcodeReeks implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 
 	@Postcode
 	private Integer vanpostcode;
@@ -19,14 +21,6 @@ public class PostcodeReeks {
 
 	public Integer getTotpostcode() {
 		return totpostcode;
-	}
-
-	public void setVanpostcode(Integer vanpostcode) {
-		this.vanpostcode = vanpostcode;
-	}
-
-	public void setTotpostcode(Integer totpostcode) {
-		this.totpostcode = totpostcode;
 	}
 
 	public boolean bevat(Integer postcode){

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,13 +26,14 @@ public class FiliaalController {
 	private static final String FILIAAL_VIEW = "filialen/filiaal";
 	private static final String TOEVOEGEN_VIEW = "filialen/toevoegen";
 	private static final String REDIRECT_URL_NA_TOEVOEGEN = "redirect:/filialen";
-	private static final Logger LOGGER = Logger.getLogger(FiliaalController.class.getName());
 	private final FiliaalService filiaalService;
 	private static final String REDIRECT_URL_FILIAAL_NIET_GEVONDEN = "redirect:/filialen";
 	private static final String REDIRECT_URL_NA_VERWIJDEREN = "redirect:/filialen/{id}/verwijderd";
 	private static final String REDIRECT_URL_HEEFT_NOG_WERKNEMERS = "redirect:/filialen/{id}";
 	private static final String VERWIJDERD_VIEW = "filialen/verwijderd";
 	private static final String PER_POSTCODE_VIEW = "filialen/perpostcode";
+	private static final String WIJZIGEN_VIEW = "filialen/wijzigen";
+	private static final String REDIRECT_URL_NA_WIJZIGEN = "redirect:/filialen";
 
 	FiliaalController(FiliaalService filiaalService){
 		this.filiaalService = filiaalService;
@@ -43,8 +45,8 @@ public class FiliaalController {
 	}
 
 	@GetMapping("toevoegen")
-	String createForm(){
-		return TOEVOEGEN_VIEW;
+	ModelAndView createForm() {
+		return new ModelAndView(TOEVOEGEN_VIEW, "filiaal", new Filiaal());
 	}
 
 	@GetMapping("{id}")
@@ -79,9 +81,22 @@ public class FiliaalController {
 		return modelAndView;
 	}
 
+	@GetMapping("{id}/wijzigen")
+	ModelAndView updateForm(@PathVariable long id) {
+		Optional<Filiaal> optionalFiliaal = filiaalService.read(id);
+		if (! optionalFiliaal.isPresent()) {
+			return new ModelAndView(REDIRECT_URL_FILIAAL_NIET_GEVONDEN);
+		}
+		return new ModelAndView(WIJZIGEN_VIEW).addObject(optionalFiliaal.get());
+	}
+
+
 	@PostMapping
-	String create(){
-		LOGGER.info("Filiaal record toegevoegd aan DataBase");
+	String create(@Valid Filiaal filiaal, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return TOEVOEGEN_VIEW;
+		}
+		filiaalService.create(filiaal);
 		return REDIRECT_URL_NA_TOEVOEGEN;
 	}
 
@@ -99,5 +114,24 @@ public class FiliaalController {
 			redirectAttributes.addAttribute("id", id).addAttribute("fout", "Filiaal heeft nog werknemers");
 			return REDIRECT_URL_HEEFT_NOG_WERKNEMERS;
 		}
+	}
+
+	@PostMapping("{id}/wijzigen")
+	String update(@Valid Filiaal filiaal, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return WIJZIGEN_VIEW;
+		}
+		filiaalService.update(filiaal);
+		return REDIRECT_URL_NA_WIJZIGEN;
+	}
+
+	@InitBinder("postcodeReeks")
+	void initBinderPostcodeReeks(WebDataBinder binder) {
+		binder.initDirectFieldAccess();
+	}
+
+	@InitBinder("filiaal")
+	void initBinderFiliaal(WebDataBinder binder) {
+		binder.initDirectFieldAccess();
 	}
 }

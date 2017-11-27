@@ -9,8 +9,7 @@
 <body>
 <vdab:menu/>
 <h1>Groene tenen - Toevoegen van filiaal</h1>
-<form method="post" action="<c:url value="/filialen"/> ">
-    <input type="submit" value="Toevoegen">
-</form>
+<c:url value='/filialen' var='url'/>
+<vdab:filiaalform url='${url}' knopTekst='Toevoegen'/>
 </body>
 </html>

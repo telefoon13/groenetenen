@@ -38,6 +38,13 @@
         <input type="submit" value="Verwijderen">
     </form>
 
+    <spring:url  value='/filialen/{id}/wijzigen' var='wijzigURL'>
+        <spring:param name='id' value='${filiaal.id}'/>
+    </spring:url>
+    <form action='${wijzigURL}'>
+        <input type='submit' value='Wijzigen'>
+    </form>
+
 </c:when>
     <c:otherwise>
         <div class='fout'>Filiaal niet gevonden</div>
