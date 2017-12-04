@@ -4,12 +4,13 @@ import be.vdab.entities.Filiaal;
 import be.vdab.exceptions.FiliaalHeeftNogWerknemersException;
 import be.vdab.repositories.FiliaalRepository;
 import be.vdab.valueobjects.PostcodeReeks;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@ReadOnlyTransactionalService
 class DefaultFiliaalService implements FiliaalService {
 
 	private final FiliaalRepository filiaalRepository;
@@ -19,6 +20,7 @@ class DefaultFiliaalService implements FiliaalService {
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void create(Filiaal filiaal) {
 		filiaalRepository.create(filiaal);
 	}
@@ -29,11 +31,13 @@ class DefaultFiliaalService implements FiliaalService {
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void update(Filiaal filiaal) {
 		filiaalRepository.update(filiaal);
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void delete(long id) {
 		if (filiaalRepository.findAantalWerknemers(id) != 0) {
 			throw new FiliaalHeeftNogWerknemersException();
