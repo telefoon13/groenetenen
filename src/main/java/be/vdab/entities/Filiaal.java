@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -14,10 +15,15 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
+@Entity
+@Table(name = "filialen")
 public class Filiaal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@NotBlank
 	@SafeHtml
@@ -33,7 +39,12 @@ public class Filiaal implements Serializable {
 	@NotNull
 	private LocalDate inGebruikName;
 	@Valid
+	@Embedded
 	private Adres adres;
+	@OneToMany(mappedBy = "filiaal")
+	private Set<Werknemer> werknemers;
+	@Version
+	private long versie;
 
 	public Filiaal(long id, String naam, boolean hoofdFiliaal, BigDecimal waardeGebouw, LocalDate inGebruikName, Adres adres) {
 		this.id = id;
@@ -93,5 +104,9 @@ public class Filiaal implements Serializable {
 
 	public void setAdres(Adres adres) {
 		this.adres = adres;
+	}
+
+	public Set<Werknemer> getWerknemers() {
+		return werknemers;
 	}
 }

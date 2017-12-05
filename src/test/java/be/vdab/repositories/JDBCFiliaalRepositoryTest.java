@@ -21,10 +21,10 @@ import static org.junit.Assert.*;
 public class JDBCFiliaalRepositoryTest {
 	@Autowired
 	private FiliaalRepository filiaalRepository;
-	@Test
-	public void create() {
-		Filiaal filiaal = new Filiaal("TestNaam", true, BigDecimal.ONE, LocalDate.now(), new Adres("Straat", "HuisNr", 1000, "Gemeente"));
-		filiaalRepository.create(filiaal);
-		assertNotEquals(0, filiaal.getId()); // id moet autonumber hebben:
-	}
+//	@Test
+//	public void create() {
+//		Filiaal filiaal = new Filiaal("TestNaam", true, BigDecimal.ONE, LocalDate.now(), new Adres("Straat", "HuisNr", 1000, "Gemeente"));
+//		filiaalRepository.create(filiaal);
+//		assertNotEquals(0, filiaal.getId()); // id moet autonumber hebben:
+//	}
 }

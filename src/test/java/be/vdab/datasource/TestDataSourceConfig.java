@@ -10,6 +10,6 @@ public class TestDataSourceConfig {
 	@Bean
 	DataSource dataSource() {
 		return new DriverManagerDataSource(
-				"jdbc:mysql://localhost/groenetenen?useSSL=false", "cursist", "cursist");
+				"jdbc:mysql://localhost/groenetenen", "cursist", "cursist");
 	}
 }
