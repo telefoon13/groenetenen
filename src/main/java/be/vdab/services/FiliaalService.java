@@ -13,6 +13,8 @@ public interface FiliaalService {
 	void delete(long id);
 	List<Filiaal> findAll();
 	long findAantalFilialen();
-
 	List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks);
+	List<Filiaal> findNietAfgeschreven();
+	void afschrijven(List<Filiaal> filialen);
+	//Enkele selectie void afschrijven(Filiaal filiaal);
 }
