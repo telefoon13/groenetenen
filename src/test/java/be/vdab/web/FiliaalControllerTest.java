@@ -52,9 +52,5 @@ public class FiliaalControllerTest {
 	public void readMetBestaandeIDGeeftFiliaalTerug() {
 		assertSame(filiaal, filiaalController.read(filiaal).getModelMap().get("filiaal"));
 	}
-//	@Test
-//	public void readMetOnbestaandeIDGeeftNullTerug() {
-//		assertNull(filiaalController.read(666L).getModelMap().get("filiaal"));
-//	}
 
 }
