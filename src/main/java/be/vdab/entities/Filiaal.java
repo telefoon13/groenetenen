@@ -1,6 +1,8 @@
 package be.vdab.entities;
 
+import be.vdab.restservices.LocalDateAdapter;
 import be.vdab.valueobjects.Adres;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -12,6 +14,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,6 +24,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "filialen")
+@XmlRootElement
 public class Filiaal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -42,6 +48,8 @@ public class Filiaal implements Serializable {
 	@Embedded
 	private Adres adres;
 	@OneToMany(mappedBy = "filiaal")
+	@XmlTransient
+	@JsonIgnore
 	private Set<Werknemer> werknemers;
 	@Version
 	private long versie;
@@ -90,6 +98,7 @@ public class Filiaal implements Serializable {
 		this.waardeGebouw = waardeGebouw;
 	}
 
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
 	public LocalDate getInGebruikName() {
 		return inGebruikName;
 	}

@@ -4,6 +4,7 @@ import be.vdab.entities.Filiaal;
 import be.vdab.exceptions.FiliaalHeeftNogWerknemersException;
 import be.vdab.services.FiliaalService;
 import be.vdab.valueobjects.PostcodeReeks;
+import org.springframework.http.MediaType;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,7 +21,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Controller
-@RequestMapping("/filialen")
+@RequestMapping(path = "/filialen", produces = MediaType.TEXT_HTML_VALUE)
 public class FiliaalController {
 
 	private static final String FILIALEN_VIEW = "filialen/filialen";
