@@ -65,6 +65,7 @@ public class ControllersConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry viewControllerRegistry){
 		viewControllerRegistry.addViewController("/info").setViewName("info");
+		viewControllerRegistry.addViewController("/login").setViewName("login");
 	}
 
 	@Override

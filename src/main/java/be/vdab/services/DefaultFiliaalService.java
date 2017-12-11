@@ -5,6 +5,7 @@ import be.vdab.exceptions.FiliaalHeeftNogWerknemersException;
 import be.vdab.repositories.FiliaalRepository;
 import be.vdab.valueobjects.PostcodeReeks;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,6 +62,7 @@ class DefaultFiliaalService implements FiliaalService {
 	}
 
 	@Override
+	@PreAuthorize("hasAuthority('manager')")
 	public List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks) {
 		return filiaalRepository.findByAdresPostcodeBetweenOrderByNaam(reeks.getVanpostcode(),reeks.getTotpostcode());
 	}

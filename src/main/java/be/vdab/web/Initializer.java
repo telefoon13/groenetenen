@@ -4,6 +4,7 @@ import be.vdab.datasource.DataSourceConfig;
 import be.vdab.repositories.RepositoriesConfig;
 import be.vdab.restclients.RestClientsConfig;
 import be.vdab.restservices.RestControllersConfig;
+import be.vdab.security.SecurityConfig;
 import be.vdab.services.ServiceConfig;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -19,7 +20,12 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[]{RepositoriesConfig.class, ServiceConfig.class, DataSourceConfig.class, RestClientsConfig.class};
+		return new Class<?>[]{
+				RepositoriesConfig.class,
+				ServiceConfig.class,
+				DataSourceConfig.class,
+				RestClientsConfig.class,
+				SecurityConfig.class};
 	}
 
 	@Override
@@ -28,7 +34,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 	}
 
 	@Override
-	protected Filter[] getServletFilters(){
-		return new Filter[]{new CharacterEncodingFilter("UTF-8"), new OpenEntityManagerInViewFilter()};
+	protected Filter[] getServletFilters() {
+		return new Filter[] { new OpenEntityManagerInViewFilter() };
 	}
 }
