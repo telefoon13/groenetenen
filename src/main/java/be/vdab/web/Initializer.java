@@ -1,5 +1,6 @@
 package be.vdab.web;
 
+import be.vdab.aop.AOPConfig;
 import be.vdab.datasource.DataSourceConfig;
 import be.vdab.repositories.RepositoriesConfig;
 import be.vdab.restclients.RestClientsConfig;
@@ -25,7 +26,8 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 				ServiceConfig.class,
 				DataSourceConfig.class,
 				RestClientsConfig.class,
-				SecurityConfig.class};
+				SecurityConfig.class,
+				AOPConfig.class};
 	}
 
 	@Override
